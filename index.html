@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      try {
+        const theme = localStorage.getItem('pdfpro-theme')
+        document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark'
+      } catch {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Primary SEO -->
+    <title>PDF Pro — Trình chỉnh sửa PDF miễn phí trên trình duyệt</title>
+    <meta name="description" content="PDF Pro là trình chỉnh sửa PDF miễn phí, mã nguồn mở, hoạt động trên trình duyệt. Chỉnh sửa, chú thích, gộp, tách, nén và sắp xếp trang PDF ngay trên thiết bị." />
+    <link rel="canonical" href="https://github.com/prodution14-hue/pdf" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://github.com/prodution14-hue/pdf" />
+    <meta property="og:title" content="PDF Pro — Trình chỉnh sửa PDF miễn phí trên trình duyệt" />
+    <meta property="og:description" content="Chỉnh sửa, chú thích, gộp, tách, nén và sắp xếp trang PDF miễn phí, mã nguồn mở, ngay trên trình duyệt. Không tải tệp lên máy chủ." />
+    <meta property="og:site_name" content="PDF Pro" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:image" content="/social-preview.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PDF Pro — Trình chỉnh sửa PDF miễn phí trên trình duyệt" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PDF Pro — Trình chỉnh sửa PDF miễn phí trên trình duyệt" />
+    <meta name="twitter:description" content="Chỉnh sửa, chú thích, gộp, tách, nén và sắp xếp trang PDF miễn phí, mã nguồn mở, ngay trên trình duyệt." />
+    <meta name="twitter:image" content="/social-preview.svg" />
+    <meta name="twitter:image:alt" content="PDF Pro — Trình chỉnh sửa PDF miễn phí trên trình duyệt" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PDF Pro",
+      "url": "https://github.com/prodution14-hue/pdf",
+      "description": "PDF Pro là trình chỉnh sửa PDF miễn phí, mã nguồn mở, hoạt động trên trình duyệt. Chỉnh sửa, chú thích, gộp, tách, nén và sắp xếp trang PDF ngay trên thiết bị.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Chỉnh sửa văn bản PDF trên trình duyệt",
+        "Dàn trang nhiều trang",
+        "Chú thích PDF",
+        "Gộp nhiều tệp PDF",
+        "Tách trang PDF",
+        "Nén dung lượng PDF",
+        "Sắp xếp lại trang PDF",
+        "Xoay trang PDF",
+        "Xóa trang PDF",
+        "Nhận dạng ký tự quang học (OCR)",
+        "Che / xóa nội dung PDF",
+        "Nhúng lại phông chữ"
+      ],
+      "isAccessibleForFree": true,
+      "codeRepository": "https://github.com/prodution14-hue/pdf",
+      "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+
+    <!-- Google Fonts — UI typefaces -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- PDF font substitutes: loaded so overlays visually match embedded fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

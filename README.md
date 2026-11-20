@@ -1,0 +1,223 @@
+![cover](public/social-preview.svg)
+
+# 📄 PDF Pro - Bộ Công Cụ Chỉnh Sửa PDF Thông Minh
+
+> Tác giả: **Nguyễn Mai Lĩnh**  
+> Chỉnh sửa PDF, chèn hình ảnh, chuyển đổi Word qua lại PDF trực tiếp trong trình duyệt. Không cần tải lên máy chủ, bảo mật 100%, hoàn toàn miễn phí.
+
+[![Open Source](https://img.shields.io/badge/open%20-source-brightgreen)]()
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Privacy First](https://img.shields.io/badge/privacy-100%25%20local-success)]()
+[![Offline Ready](https://img.shields.io/badge/offline-ready-blueviolet)]()
+[![Built with React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react&logoColor=white)]()
+[![PDF.js](https://img.shields.io/badge/PDF.js-Mozilla-orange)]()
+[![pdf-lib](https://img.shields.io/badge/pdf--lib-core-red)]()
+
+---
+
+## Giới thiệu về PDF Pro
+
+PDF Pro được phát triển bởi **Nguyễn Mai Lĩnh** nhằm mang lại trải nghiệm xử lý PDF mạnh mẽ, mượt mà và an toàn tối đa. Tất cả tác vụ đều được thực hiện 100% bằng công nghệ WebAssembly và JavaScript ngay trên máy của bạn — không có file nào bị tải lên máy chủ.
+
+### ✨ Các tính năng nổi bật mới bổ sung:
+- 🖼️ **Thêm ảnh vào PDF**: Chèn hình ảnh, logo, con dấu vào bất kỳ trang nào của PDF (hỗ trợ cả trong Editor kéo thả và công cụ chuyên dụng).
+- 🔄 **Chuyển Word qua PDF (Word to PDF)**: Chuyển đổi file `.docx` sang `.pdf` chuẩn xác, giữ nguyên bố cục.
+- 🔄 **Chuyển PDF qua Word (PDF to Word)**: Trích xuất toàn bộ văn bản và cấu trúc sang file `.docx` có thể chỉnh sửa tự do.
+
+---
+
+| Tính năng | Các công cụ khác | **PDF Pro (Nguyễn Mai Lĩnh)** |
+|---|---|---|
+| Chỉnh sửa văn bản trực tiếp | Thường tính phí | **Miễn phí 100%** |
+| Chèn hình ảnh, con dấu | Giới hạn gói trả phí | **Tích hợp sẵn** |
+| Chuyển đổi Word ⇆ PDF | Giới hạn số lần | **Không giới hạn** |
+| Giới hạn dung lượng | Bị bóp dung lượng | **Không giới hạn** |
+| Bảo mật dữ liệu | Tải lên máy chủ đám mây | **100% Xử lý nội bộ trên máy** |
+| Giấy phép | Mã đóng / Độc quyền | **MIT License** |
+| File size limits | Often capped | **No file size limit** |
+| Daily task limits | Free plans may stop after a few tasks | **No task limits** |
+| File privacy | Files may be uploaded to a server | **100% local** |
+| Offline use | Usually browser or cloud-based | **Works offline** |
+| Open source | Rare | **MIT** |
+| Cost | Many plans charge monthly | **Free** |
+
+---
+
+## Features
+
+### Edit
+- **Edit existing PDF text** - click any text block, edit in-place, auto-detect the original font
+- Add new text boxes anywhere on the page
+- Change font family, size, color, bold, and italic
+- Add, replace, and remove images *(coming soon)*
+
+### Organize  
+- **Multi-page layout** - arrange and export multiple pages in a single print-ready view
+- Merge multiple PDFs with drag-to-reorder
+- Split PDF by page range
+- Reorder pages via drag-and-drop
+- Rotate individual pages
+- Extract specific pages
+
+
+### Optimize
+- Compress PDF with browser-native object stream compression
+- PDF/A compliance check
+
+### Secure
+- Password protect with AES-256
+- Remove existing passwords
+- Redact sensitive content permanently
+- Add text watermarks
+
+### Smart *(coming soon)*
+- OCR for scanned and image PDFs via Tesseract.js — runs offline
+- AI font matching to keep text edits visually consistent
+
+---
+
+## Tech Stack
+
+| Library | Purpose |
+|---|---|
+| [pdf-lib](https://pdf-lib.js.org/) | PDF creation, modification, export |
+| [PDF.js](https://mozilla.github.io/pdf.js/) | PDF rendering and text extraction |
+| [Tesseract.js](https://tesseract.projectnaptha.com/) | OCR for scanned PDFs |
+| [React](https://react.dev/) | UI framework |
+| [Zustand](https://zustand-demo.pmnd.rs/) | State management |
+| [Vite](https://vitejs.dev/) | Build tool |
+
+**Zero backend. Zero user tracking. 100% browser-native.**  
+*Vercel Analytics is used for anonymous deployment metrics only — no user data is collected.*
+
+---
+
+## Getting Started
+
+```bash
+git clone https://github.com/prodution14-hue/pdf.git
+cd pdf
+npm install
+npm run dev
+npm run build
+```
+
+---
+
+## Architecture
+
+```text
+src/
+  components/
+    editor/          # PdfCanvas, TextBlock, AnnotationLayer, Toolbars
+    layout/          # Navbar
+    ui/              # DropZone, shared components
+  lib/
+    pdfRenderer.js   # PDF.js wrapper — render pages, extract text
+    pdfExporter.js   # pdf-lib wrapper — export, merge, split, etc.
+  pages/
+    Landing.jsx      # Marketing landing page
+    Editor.jsx       # Main PDF editor
+    Tools.jsx        # Individual tool UIs
+    MultiPageLayout.jsx  # Multi-page layout tool
+  store/
+    pdfStore.js      # Zustand global state
+  styles/
+    globals.css      # Design system tokens
+```
+
+### Text editing architecture
+
+PDF Pro uses a layered editing model:
+
+```text
+PDF bytes
+  -> PDF.js render + text extraction
+  -> canonical text run metadata
+  -> browser overlay editor
+  -> layout-fit/export planner
+  -> pdf-lib browser export
+  -> future PDFium/MuPDF advanced engine
+```
+
+Current browser path:
+
+1. **Render** - PDF.js renders each page to a high-resolution canvas.
+2. **Extract** - PDF.js extracts text runs, transforms, font ids, approximate font names, color, baseline, ascent/descent, and edit boxes.
+3. **Model** - PDF Pro stores original run metadata: text, bbox, baseline, font fallback, color, line height, estimated glyph advances, and max edit dimensions.
+4. **Overlay** - Editable DOM text is positioned over the PDF raster and uses local background sampling to hide the original text while editing.
+5. **Fit** - On export, edited text is laid out line-by-line and fit back to the original run width using conservative character spacing and small size adjustment.
+6. **Export** - pdf-lib writes background patches, replacement text, annotations, page operations, and document tools.
+
+This is not yet full Acrobat/Foxit-style object editing. The current path is an overlay-and-repair browser exporter. The production-grade target is an advanced engine that can inspect and rewrite PDF page objects directly:
+
+```text
+src/pdf/
+  engines/
+    pdfjsEngine.ts       # Browser render/extract fallback
+    pdfiumEngine.ts      # Planned object-level editor
+    mupdfEngine.ts       # Optional native/WASM alternative
+  model/
+    TextRun.ts           # glyphs, fonts, colors, matrices, resources
+    FontResource.ts
+    EditOperation.ts
+  layout/
+    glyphMetrics.ts
+    fitText.ts
+    paragraphReflow.ts
+  background/
+    renderWithoutText.ts
+    inpaintPatch.ts
+  export/
+    exportPlanner.ts
+    pdfLibOverlayExporter.ts
+    objectRewriteExporter.ts
+  repair/
+    visualDiff.ts
+    autoFitRepair.ts
+```
+
+The browser-only implementation can be excellent for simple and moderately complex PDFs. True high-fidelity editing for embedded subset fonts, object removal, kerning-preserving replacement, complex scripts, and image/gradient background reconstruction requires PDFium, MuPDF, or another real PDF content engine.
+
+---
+
+## Roadmap
+
+- [x] PDF rendering and text extraction overlay
+- [x] Add new text boxes
+- [x] Drag-and-drop text positioning
+- [x] Annotations (highlight, redact, shapes)
+- [x] Merge, split, compress tools
+- [x] Watermark, rotate, page management
+- [x] Multi-page layout
+- [x] Preserve richer original text-run metadata for export fitting
+- [x] Fit edited text back to the original run width during pdf-lib export
+- [ ] Packaged fallback font registry with width-vector matching
+- [ ] OCR via Tesseract.js (in progress — not yet stable)
+- [ ] Image add/replace/remove
+- [ ] Visual export diff for edited regions
+- [ ] e-Sign with canvas signature pad
+- [ ] Paragraph grouping and multi-line reflow
+- [ ] PDF to Word/DOCX export
+- [ ] Form filling and flattening
+- [ ] Batch processing
+- [ ] **Advanced** — PDFium/MuPDF object-level text replacement
+- [ ] **Advanced** — Embedded font reuse and kerning-preserving export
+- [ ] **Advanced** — Background reconstruction by rendering pages with target text objects removed
+
+---
+
+## Contributing
+
+PRs are very welcome. Please open an issue first for major changes.
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## License
+
+MIT © 2026 Nguyễn Mai Lĩnh
